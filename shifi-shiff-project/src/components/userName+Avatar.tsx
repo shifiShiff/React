@@ -1,7 +1,6 @@
 import { useContext } from "react";
 import { UserContext } from "./HomePage";
 import { Avatar, Box, Typography } from "@mui/material";
-import { deepOrange } from "@mui/material/colors";
 
 
 const UserName = () => {
@@ -18,7 +17,9 @@ const UserName = () => {
       
 
     <Box sx={{ display: "flex", alignItems: "center", marginBottom:"20px"}}>
-      <Avatar sx={{ bgcolor: deepOrange[500] }}>{f[0]}</Avatar>      
+
+      <Avatar sx={{ bgcolor:'  #40E0D0'  , marginRight: '15px'}}>{f[0]}</Avatar>  
+
       <Typography variant="h6">hello {f}</Typography>
     </Box>
             

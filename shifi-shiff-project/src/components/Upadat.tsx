@@ -9,14 +9,14 @@ const style = {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
+    background: 'linear-gradient(50deg, #40E0D0 50%,  #D3D3D3 80%)',
+    border: '3px solid #40E0D0 ',
     boxShadow: 24,
+    borderRadius: '16px',
     p: 4,
 };
 
 
-  
 
 const UpdateDetails = () => {
 
@@ -28,18 +28,20 @@ const UpdateDetails = () => {
     const context = useContext(UserContext);
 
 
-    const updateUser = () => {
+    const handleSubmit = () => {
 
         setClicked(false);
 
         if (context) {
-            context.userDispatch({type:'UPDATE',data: {
-                
-                lastName:lastref.current?.value||'' ,
-                email:emailref.current?.value|| '',
-                addres: addressref.current?.value||'',
-                phone: phoneref.current?.value||''
-        }})
+            context.userDispatch({
+                type: 'UPDATE', data: {
+
+                    lastName: lastref.current?.value || '',
+                    email: emailref.current?.value || '',
+                    addres: addressref.current?.value || '',
+                    phone: phoneref.current?.value || ''
+                }
+            })
         }
 
 
@@ -48,27 +50,35 @@ const UpdateDetails = () => {
     return (<>
 
 
-        <Button onClick={() => { setClicked(true) }} variant="outlined">Update</Button>
+        <Button onClick={() => { setClicked(true) }} variant="outlined" sx={{backgroundColor: 'white',color: ' #40E0D0 ', border: '1px solid gray'}}>Update</Button>
 
 
         {clicked && <Modal
-            open={true}
-            onClose={() => { }}
+            open={clicked}
+            onClose={() => { setClicked(false)}}
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
         >
             <Box sx={style}>
                 <Typography id="modal-modal-title" variant="h6" component="h2">
-                    <input ref={lastref} placeholder="lastName" />
-                    <br></br>
-                    <input ref={emailref} placeholder="email" />
-                    <br></br>
-                    <input ref={addressref} placeholder="address" />
-                    <br></br>
-                    <input ref={phoneref} placeholder="phone" />
-                    <br></br>
-                    <Button onClick={updateUser} variant="contained" >Send</Button>
-
+                    <form>
+                        <input ref={lastref} placeholder="lastName" />
+                        <br></br>
+                        <input ref={emailref} placeholder="email" />
+                        <br></br>
+                        <input ref={addressref} placeholder="address" />
+                        <br></br>
+                        <input ref={phoneref} placeholder="phone" />
+                        <br></br>
+                        <Button onClick={handleSubmit} variant="contained" sx={{
+                            backgroundColor: 'white',
+                            color: ' #40E0D0 ',
+                            marginTop: '15px',
+                            '&:hover': {
+                                backgroundColor: '#f5f5f5',
+                            },
+                        }} >Send</Button>
+                    </form>
                 </Typography>
 
             </Box>
