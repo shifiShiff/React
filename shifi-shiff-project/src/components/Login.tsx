@@ -28,26 +28,21 @@ const Login = ({ onLoginSuccess }: { onLoginSuccess: Function }) => {
   const [clicked, setClicked] = useState(false)
   const context = useContext(UserContext);
 
-  if (!context) {
-    throw new Error("UserContext is not available. Make sure it's provided at a higher level.");
-  }
-  const { userDispatch } = context;
-
 
   const handleSubmit = () => {
-
-    setClicked(false)
-    if (context.user.firstName === nameref.current?.value && context.user.password == passwordref.current?.value) {
-      userDispatch({ type: 'CREATE', data: { firstName: nameref.current?.value || '', password: passwordref.current?.value || '' } })
-
-      onLoginSuccess()
+    if (context) {
+      setClicked(false)
+      if (context.user.firstName === nameref.current?.value && context.user.password == passwordref.current?.value) {
+        context.userDispatch({ type: 'CREATE', data: { firstName: nameref.current?.value || '', password: passwordref.current?.value || '' } })
+        onLoginSuccess()
+      }
     }
   }
 
 
   return (<>
 
-    <Button onClick={() => { setClicked(true) }} variant="outlined" sx={{backgroundColor: 'white',color: ' #40E0D0 ', border: '1px solid gray'}}>Login</Button>
+    <Button onClick={() => { setClicked(true) }} variant="outlined" sx={{ backgroundColor: 'white', color: ' #40E0D0 ', border: '1px solid gray' }}>Login</Button>
 
 
     {clicked &&
@@ -67,9 +62,9 @@ const Login = ({ onLoginSuccess }: { onLoginSuccess: Function }) => {
               <Button onClick={handleSubmit} variant="contained" endIcon={<SendIcon />} sx={{
                 backgroundColor: 'white',
                 color: ' #40E0D0 ',
-                marginTop: '15px', 
+                marginTop: '15px',
                 '&:hover': {
-                backgroundColor: '#f5f5f5',
+                  backgroundColor: '#f5f5f5',
                 },
               }}
               >Send</Button>
