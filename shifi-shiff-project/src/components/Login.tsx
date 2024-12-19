@@ -2,7 +2,7 @@ import { useContext, useRef, useState } from "react";
 import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
 import { UserContext } from "./HomePage";
-import { Box, Modal, Typography } from "@mui/material";
+import { Box, Modal, TextField, Typography } from "@mui/material";
 
 
 const style = {
@@ -54,12 +54,10 @@ const Login = ({ onLoginSuccess }: { onLoginSuccess: Function }) => {
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            <form>
-              <input ref={nameref} placeholder="name" />
-              <br></br>
-              <input ref={passwordref} placeholder="password" />
-              <br></br>
-              <Button onClick={handleSubmit} variant="contained" endIcon={<SendIcon />} sx={{
+            <form onSubmit={handleSubmit}>
+              <TextField fullWidth label="First Name" variant="outlined" inputRef={nameref} />
+              <TextField fullWidth label="Password" variant="outlined" inputRef={passwordref} />
+              <Button  type='submit' variant="contained" endIcon={<SendIcon />} sx={{
                 backgroundColor: 'white',
                 color: ' #40E0D0 ',
                 marginTop: '15px',

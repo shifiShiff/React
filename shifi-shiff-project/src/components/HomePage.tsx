@@ -3,7 +3,7 @@ import { User, userReducer } from "./User";
 import Login from "./Login";
 import UpdateDetails from "./Upadat";
 import UserName from "./userName+Avatar";
-import { Box } from "@mui/material";
+import { Box, Grid2 as Grid } from "@mui/material";
 
 //  export const UserContext = createContext({})
 
@@ -37,7 +37,7 @@ const HomePage = () => {
 
   return (<>
 
-    <Box
+    {/* <Box
       sx={{
         position: "fixed",
         top: 5,
@@ -54,7 +54,32 @@ const HomePage = () => {
 
 
       </UserContext.Provider>
-    </Box>
+    </Box> */}
+
+
+
+    <Grid container>
+      <Grid xs={4} sx={{
+        position: "fixed",
+        top: 5,
+        left: 5
+      }}>
+
+      <UserContext.Provider value={{ user, userDispatch }}>
+
+{loginSuccess === false && <Login onLoginSuccess={handleLoginSuccess}></Login>}
+
+{loginSuccess && <UserName></UserName>}
+
+<div></div>
+{loginSuccess && <UpdateDetails></UpdateDetails>}
+
+
+</UserContext.Provider>
+
+      </Grid>
+
+    </Grid>
 
     {user.firstName}
     {user.lastName}
