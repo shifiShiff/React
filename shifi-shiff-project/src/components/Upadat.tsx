@@ -28,8 +28,8 @@ const UpdateDetails = () => {
     const context = useContext(UserContext);
 
 
-    const handleSubmit = () => {
-
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
         setClicked(false);
 
         if (context) {
@@ -62,10 +62,10 @@ const UpdateDetails = () => {
             <Box sx={style}>
                 <Typography id="modal-modal-title" variant="h6" component="h2">
                     <form onSubmit={handleSubmit}>
-                        <TextField fullWidth label="Last Name" variant="outlined" inputRef={lastref} />
-                        <TextField fullWidth label="Email" variant="outlined" inputRef={emailref} />
-                        <TextField fullWidth label="Address" variant="outlined" inputRef={addressref} />
-                        <TextField fullWidth label="Phone" variant="outlined" inputRef={phoneref} />
+                        <TextField type="text" fullWidth label="Last Name" variant="outlined" inputRef={lastref} />
+                        <TextField type="email" fullWidth label="Email" variant="outlined" inputRef={emailref} />
+                        <TextField type="text" fullWidth label="Address" variant="outlined" inputRef={addressref} />
+                        <TextField type="text" fullWidth label="Phone" variant="outlined" inputRef={phoneref} />
 
                         <Button type='submit' variant="contained" sx={{
                             backgroundColor: 'white',

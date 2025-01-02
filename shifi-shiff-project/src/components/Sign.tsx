@@ -23,7 +23,7 @@ const style = {
 
 
 
-const Login = ({ onLoginSuccess }: { onLoginSuccess: Function }) => {
+const SignIn = ({ onLoginSuccess }: { onLoginSuccess: Function }) => {
 
 
   const nameref = useRef<HTMLInputElement>(null)
@@ -38,20 +38,20 @@ const Login = ({ onLoginSuccess }: { onLoginSuccess: Function }) => {
     e.preventDefault();
     
     try {
-      const res = await axios.post('http://localhost:3000/api/user/login', {
+      const res = await axios.post('http://localhost:3000/api/user/register', {
         firstName: nameref.current?.value,
         password: passwordref.current?.value
-      })
+      }
+       
+      )
 
       console.log(res);
       setUser(res.data.user)
       onLoginSuccess();
-
       if (context) {
-      setClicked(false)
-        context.userDispatch({ type: 'CREATE', data: { firstName: nameref.current?.value || '', password: passwordref.current?.value || '' } })
-    }
-
+        setClicked(false)
+          context.userDispatch({ type: 'CREATE', data: { firstName: nameref.current?.value || '', password: passwordref.current?.value || '' } })
+      }
 
     } catch (e) {
       if (e.status === 401)
@@ -67,7 +67,7 @@ const Login = ({ onLoginSuccess }: { onLoginSuccess: Function }) => {
 
   return (<>
 
-    <Button onClick={() => { setClicked(true) }} variant="outlined" sx={{ backgroundColor: 'white', color: ' #40E0D0 ', border: '1px solid gray' }}>Login</Button>
+    <Button onClick={() => { setClicked(true) }} variant="outlined" sx={{ backgroundColor: 'white', color: ' #40E0D0 ', border: '1px solid gray' }}>SignIn</Button>
 
 
     {clicked &&
@@ -102,5 +102,5 @@ const Login = ({ onLoginSuccess }: { onLoginSuccess: Function }) => {
 
   }
 
-  export default Login
+  export default SignIn
 

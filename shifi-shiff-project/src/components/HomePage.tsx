@@ -3,83 +3,74 @@ import { User, userReducer } from "./User";
 import Login from "./Login";
 import UpdateDetails from "./Upadat";
 import UserName from "./userName+Avatar";
-import { Box, Grid2 as Grid } from "@mui/material";
+import { Grid2 as Grid } from "@mui/material";
+import SignIn from "./Sign";
 
 //  export const UserContext = createContext({})
 
 export type UserContextType = {
   user: User;
-  userDispatch: React.Dispatch<any>; // Action typing can be more specific
+  userDispatch: React.Dispatch<any>; 
 };
 
-export const UserContext = createContext<UserContextType | null>(null); // יש להחזיר null במקרה שאין קונטקסט
+export const UserContext = createContext<UserContextType | null>(null);
 
 
 const HomePage = () => {
 
   const initialUser: User = {
-    firstName: 'shifi',
+    firstName: '',
     lastName: '',
     email: '',
-    password: '1234',
+    password: '',
     addres: '',
     phone: ''
   };
 
   const [user, userDispatch] = useReducer(userReducer, initialUser)
-  const [loginSuccess, setLoginSuccess] = useState(false); // מצב התחברות
+  const [loginSuccess, setLoginSuccess] = useState(false); 
 
   const handleLoginSuccess = () => {
-    setLoginSuccess(true);
+    setLoginSuccess( (prevState) => !prevState);
+
+    console.log(loginSuccess);
+    
   };
 
 
 
   return (<>
 
-    {/* <Box
-      sx={{
-        position: "fixed",
-        top: 5,
-        left: 5
-      }}>
-      <UserContext.Provider value={{ user, userDispatch }}>
-
-        {loginSuccess === false && <Login onLoginSuccess={handleLoginSuccess}></Login>}
-
-        {loginSuccess && <UserName></UserName>}
-
-        <div></div>
-        {loginSuccess && <UpdateDetails></UpdateDetails>}
-
-
-      </UserContext.Provider>
-    </Box> */}
-
-
-
     <Grid container>
-      <Grid xs={4} sx={{
+      <Grid sx={{
         position: "fixed",
         top: 5,
         left: 5
       }}>
 
-      <UserContext.Provider value={{ user, userDispatch }}>
+        <UserContext.Provider value={{ user, userDispatch }}>
 
-{loginSuccess === false && <Login onLoginSuccess={handleLoginSuccess}></Login>}
+          {!loginSuccess ? ( 
+          <>
+            <Login onLoginSuccess={handleLoginSuccess} />
+            <SignIn onLoginSuccess={handleLoginSuccess}/>
 
-{loginSuccess && <UserName></UserName>}
+            </>
+            
+          ) : ( 
+            <>
+              <UserName />
+              <UpdateDetails />
+            </>
+          )}
 
-<div></div>
-{loginSuccess && <UpdateDetails></UpdateDetails>}
 
-
-</UserContext.Provider>
+        </UserContext.Provider>
 
       </Grid>
 
     </Grid>
+
 
     {user.firstName}
     {user.lastName}
