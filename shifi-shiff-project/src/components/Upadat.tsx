@@ -1,6 +1,8 @@
 import { Box, Button, Modal, TextField, Typography } from "@mui/material";
 import { useContext, useRef, useState } from "react";
 import { UserContext } from "./HomePage";
+import axios from "axios";
+import { userReducer } from "./User";
 
 
 const style = {
@@ -28,24 +30,43 @@ const UpdateDetails = () => {
     const context = useContext(UserContext);
 
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        setClicked(false);
+        
+        try {
+          const res = await axios.put('http://localhost:3000/api/user', {
+            id:context?.user.id,
+            firstName: context?.user.firstName,
+            lastName: lastref.current?.value || context?.user.lastName,
+            password: context?.user.password,
+            email: emailref.current?.value||context?.user.email,
+            address:addressref.current?.value|| context?.user.addres,
+            phone:phoneref.current?.value|| context?.user.phone
 
-        if (context) {
-            context.userDispatch({
-                type: 'UPDATE', data: {
-
-                    lastName: lastref.current?.value || '',
-                    email: emailref.current?.value || '',
-                    addres: addressref.current?.value || '',
-                    phone: phoneref.current?.value || ''
-                }
-            })
+        },
+        {
+            headers: {
+                'user-id': context?.user.id
+            },
         }
-
-
-    }
+          )
+    
+        //   console.log(res);
+        //   console.log(res.data.user);
+          
+          if (context?.user        ) {
+            setClicked(false)
+              context.userDispatch({ type: 'UPDATE', data: res.data.user })
+          }
+    
+        } catch (e) {
+          if (e.status === 401)
+            alert('משתמש לא קיים')
+          console.log(e);
+    
+        }
+      }
+    
 
     return (<>
 

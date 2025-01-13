@@ -1,4 +1,4 @@
-import { useContext, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
 import { UserContext } from "./HomePage";
@@ -32,8 +32,6 @@ const Login = ({ onLoginSuccess }: { onLoginSuccess: Function }) => {
   const context = useContext(UserContext);
   const [user, setUser] = useState({})
 
-
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
@@ -45,12 +43,21 @@ const Login = ({ onLoginSuccess }: { onLoginSuccess: Function }) => {
 
       console.log(res);
       setUser(res.data.user)
+      console.log(res.data.user);
+      
+    
+      
       onLoginSuccess();
 
       if (context) {
       setClicked(false)
-        context.userDispatch({ type: 'CREATE', data: { firstName: nameref.current?.value || '', password: passwordref.current?.value || '' } })
-    }
+        // context.userDispatch({ type: 'CREATE', data: { id:res.data.user.id, firstName:res.data.user.firstName , password: res.data.user.password } })
+        context.userDispatch({ type: 'CREATE', data: res.data.user })
+       
+        console.log(context.user);
+    
+      }
+
 
 
     } catch (e) {
@@ -81,7 +88,7 @@ const Login = ({ onLoginSuccess }: { onLoginSuccess: Function }) => {
           <Typography id="modal-modal-title" variant="h6" component="h2">
             <form onSubmit={handleSubmit}>
               <TextField type="text" fullWidth label="First Name" variant="outlined" inputRef={nameref} />
-              <TextField type="text" fullWidth label="Password" variant="outlined" inputRef={passwordref} />
+              <TextField type="password" fullWidth label="Password" variant="outlined" inputRef={passwordref} />
               <Button type='submit' variant="contained" endIcon={<SendIcon />} sx={{
                 backgroundColor: 'white',
                 color: ' #40E0D0 ',

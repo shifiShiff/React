@@ -19,6 +19,7 @@ export const UserContext = createContext<UserContextType | null>(null);
 const HomePage = () => {
 
   const initialUser: User = {
+    id : null,
     firstName: '',
     lastName: '',
     email: '',
@@ -72,6 +73,8 @@ const HomePage = () => {
     </Grid>
 
 
+
+    {user.id}
     {user.firstName}
     {user.lastName}
     {user.email}

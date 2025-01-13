@@ -47,10 +47,12 @@ const SignIn = ({ onLoginSuccess }: { onLoginSuccess: Function }) => {
 
       console.log(res);
       setUser(res.data.user)
+      console.log(res.data.userId);
+      
       onLoginSuccess();
       if (context) {
         setClicked(false)
-          context.userDispatch({ type: 'CREATE', data: { firstName: nameref.current?.value || '', password: passwordref.current?.value || '' } })
+          context.userDispatch({ type: 'CREATE', data: {id:res.data.userId, firstName: nameref.current?.value || '', password: passwordref.current?.value || '' } })
       }
 
     } catch (e) {
@@ -81,7 +83,7 @@ const SignIn = ({ onLoginSuccess }: { onLoginSuccess: Function }) => {
           <Typography id="modal-modal-title" variant="h6" component="h2">
             <form onSubmit={handleSubmit}>
               <TextField type="text" fullWidth label="First Name" variant="outlined" inputRef={nameref} />
-              <TextField type="text" fullWidth label="Password" variant="outlined" inputRef={passwordref} />
+              <TextField type="password" fullWidth label="Password" variant="outlined" inputRef={passwordref} />
               <Button type='submit' variant="contained" endIcon={<SendIcon />} sx={{
                 backgroundColor: 'white',
                 color: ' #40E0D0 ',
