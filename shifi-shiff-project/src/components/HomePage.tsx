@@ -5,6 +5,7 @@ import UpdateDetails from "./Upadat";
 import UserName from "./userName+Avatar";
 import { Grid2 as Grid } from "@mui/material";
 import SignIn from "./Sign";
+import Recipes from "./recipes";
 
 //  export const UserContext = createContext({})
 
@@ -81,6 +82,8 @@ const HomePage = () => {
     {user.password}
     {user.addres}
     {user.phone}
+
+    <Recipes></Recipes>
 
   </>)
 

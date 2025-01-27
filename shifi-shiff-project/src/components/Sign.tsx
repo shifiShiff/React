@@ -3,7 +3,7 @@ import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
 import { UserContext } from "./HomePage";
 import { Box, Modal, TextField, Typography } from "@mui/material";
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 
 
 
