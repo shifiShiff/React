@@ -57,14 +57,11 @@ class RecipeStore {
             )
 
             console.log(res);
-            // console.log(res.data.userId);
             this.getAllRecipesFromServer();
 
         } catch (e) {
-            if ((e as AxiosError).response && (e as AxiosError).response?.status === 401)
-                alert('מייל או סיסמא לא תקינים')
             if ((e as AxiosError).response && (e as AxiosError).response?.status === 403)
-                alert('יש להתחבר בכדי להכניס מתכון ')
+                alert('You must be logged in to add a recipe')
             console.log(e);
 
         }

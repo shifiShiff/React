@@ -56,8 +56,8 @@ const SignIn = ({ onLoginSuccess }: { onLoginSuccess: Function }) => {
       }
 
     } catch (e) {
-      if ((e as AxiosError).response && (e as AxiosError).response?.status === 401)
-        alert('מייל או סיסמא לא תקינים')
+      if ((e as AxiosError).response && (e as AxiosError).response?.status === 400)
+        alert("User already exists")
       console.log(e);
 
     }
@@ -69,7 +69,8 @@ const SignIn = ({ onLoginSuccess }: { onLoginSuccess: Function }) => {
 
   return (<>
 
-    <Button onClick={() => { setClicked(true) }} variant="outlined" sx={{ backgroundColor: 'white', color: ' #40E0D0 ', border: '1px solid gray' }}>SignIn</Button>
+
+    <Button onClick={() => { setClicked(true) }} variant="outlined" sx={{ backgroundColor: 'white', color: ' #40E0D0 ', border: '1px solid gray', marginLeft:'10px', marginTop:'10px' }}>Sign Up</Button>
 
 
     {clicked &&

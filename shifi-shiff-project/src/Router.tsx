@@ -1,5 +1,4 @@
 import AppLayout from "./components/AppLayout";
-import NavBar from "./components/NavBar";
 import RecipesList from "./components/recipesList";
 import {createBrowserRouter } from "react-router";
 import AddRecipe from "./components/addRecipe";
@@ -11,9 +10,7 @@ export const myRouter = createBrowserRouter([
         path: '/',
         element: <AppLayout />,
         errorElement: <>main error</>,
-        children: [
-            // { path: '/', element: <NavBar/> },
-           
+        children: [           
             {
                 path: 'recipes/', element: <RecipesList />,children: [ {
 
@@ -24,9 +21,6 @@ export const myRouter = createBrowserRouter([
             {
                 path: 'Addrecipe', element: <AddRecipe />
             },
-            // {
-            //     path: 'showRecipe/:id', element: <SingleRecipe />
-            // }
             
         ]
     }

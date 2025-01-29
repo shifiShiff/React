@@ -4,15 +4,12 @@ import { createContext, useReducer } from "react";
 import { User, userReducer } from "./User";
 import HomePage from "./HomePage";
 
-
 export type UserContextType = {
     user: User;
     userDispatch: React.Dispatch<any>;
 };
 
 export const UserContext = createContext<UserContextType | null>(null);
-
-
 
 const AppLayout = () => {
 
@@ -43,15 +40,6 @@ const AppLayout = () => {
             <div></div>
         </UserContext>
 
-
-
-        {user.id}
-        {user.firstName}
-        {user.lastName}
-        {user.email}
-        {user.password}
-        {user.addres}
-        {user.phone}
     </>)
 }
 

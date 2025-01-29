@@ -4,10 +4,6 @@ import SendIcon from '@mui/icons-material/Send';
 import { UserContext } from "./AppLayout";
 import { Box, Modal, TextField, Typography } from "@mui/material";
 import axios, { AxiosError } from "axios";
-import { Height } from "@mui/icons-material";
-
-
-
 
 const style = {
   position: 'absolute',
@@ -22,11 +18,7 @@ const style = {
   p: 4,
 };
 
-
-
 const Login = ({ onLoginSuccess }: { onLoginSuccess: Function }) => {
-
-
   const nameref = useRef<HTMLInputElement>(null)
   const passwordref = useRef<HTMLInputElement>(null)
   const [clicked, setClicked] = useState(false)
@@ -42,41 +34,25 @@ const Login = ({ onLoginSuccess }: { onLoginSuccess: Function }) => {
         password: passwordref.current?.value
       })
 
-      console.log(res);
       setUser(res.data.user)
       console.log(res.data.user);
-      
-    
-      
       onLoginSuccess();
-
       if (context) {
       setClicked(false)
-        // context.userDispatch({ type: 'CREATE', data: { id:res.data.user.id, firstName:res.data.user.firstName , password: res.data.user.password } })
         context.userDispatch({ type: 'CREATE', data: res.data.user })
-       
         console.log(context.user);
-    
       }
-
-
 
     } catch (e) {
       if ((e as AxiosError).response && (e as AxiosError).response?.status === 401)
-        alert('מייל או סיסמא לא תקינים')
+        alert('Invalid credentials')
       console.log(e);
-
     }
   }
 
-
-
-
-
   return (<>
 
-    <Button onClick={() => { setClicked(true) }} variant="outlined" sx={{ backgroundColor: 'white', color: ' #40E0D0 ', border: '1px solid gray'  }}>Login</Button>
-
+    <Button onClick={() => { setClicked(true) }} variant="outlined" sx={{ backgroundColor: 'white', color: ' #40E0D0 ', border: '1px solid gray', marginLeft:'7px',  marginTop:'10px'}}>Login</Button>
 
     {clicked &&
       <Modal
@@ -91,9 +67,7 @@ const Login = ({ onLoginSuccess }: { onLoginSuccess: Function }) => {
               <TextField type="text" fullWidth label="First Name" variant="outlined" inputRef={nameref} />
               <TextField type="password" fullWidth label="Password" variant="outlined" inputRef={passwordref} />
               <Button type='submit' variant="contained" endIcon={<SendIcon />} sx={{
-                backgroundColor: 'white',
-                color: ' #40E0D0 ',
-                marginTop: '15px',
+                backgroundColor: 'white',color: ' #40E0D0 ',marginTop: '15px',
                 '&:hover': {
                   backgroundColor: '#f5f5f5',
                 },
