@@ -1,13 +1,14 @@
-import { Description } from "@mui/icons-material";
 import axios from "axios";
 import { makeAutoObservable } from "mobx";
+import { AxiosError } from 'axios';
+
 
 export type RecipeType = {
     id?: number,
     title: string,
     description: string,
     authorId?: number,
-    ingredients: string[],
+    ingredients?:string[],
     instructions: string
 }
 
@@ -27,16 +28,10 @@ class RecipeStore {
         try {
             const res = await axios.get('http://localhost:3000/api/recipes')
 
-            // console.log(res);
-            // console.log(res.data);
-            // const recipes = res.data.map(t => t.title)
-            // console.log(recipes);
             this.list = res.data;
-            // console.log("list");
-            // console.log(this.list);
-            // console.log("list");
+
         } catch (e) {
-            if (e.status === 401)
+            if ((e as AxiosError).response && (e as AxiosError).response?.status === 401) 
                 alert("something worng...")
             console.log(e);
         }
@@ -61,18 +56,23 @@ class RecipeStore {
                 }
             )
 
-            // console.log(res);
+            console.log(res);
             // console.log(res.data.userId);
             this.getAllRecipesFromServer();
 
         } catch (e) {
-            if (e.status === 401)
+            if ((e as AxiosError).response && (e as AxiosError).response?.status === 401)
                 alert('מייל או סיסמא לא תקינים')
-            if (e.status === 403)
+            if ((e as AxiosError).response && (e as AxiosError).response?.status === 403)
                 alert('יש להתחבר בכדי להכניס מתכון ')
             console.log(e);
 
         }
+    }
+
+    GetRecipeById(id:number):RecipeType|undefined {
+        return this.list.find(t=>t.id===id);
+
     }
 
 }

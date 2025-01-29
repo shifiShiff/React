@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { UserContext } from "./HomePage";
+import { UserContext } from "./AppLayout";
 import { Avatar, Box, Typography } from "@mui/material";
 
 

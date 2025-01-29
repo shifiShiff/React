@@ -1,36 +1,38 @@
-import { createContext, useReducer, useState } from "react";
-import { User, userReducer } from "./User";
+import {useState } from "react";
+
 import Login from "./Login";
 import UpdateDetails from "./Upadat";
 import UserName from "./userName+Avatar";
-import { Grid2 as Grid } from "@mui/material";
+import {Grid2 as Grid } from "@mui/material";
 import SignIn from "./Sign";
-import RecipesList from "./recipesList";
-import AddRecipe from "./addRecipe";
+
 
 //  export const UserContext = createContext({})
 
-export type UserContextType = {
-  user: User;
-  userDispatch: React.Dispatch<any>; 
-};
 
-export const UserContext = createContext<UserContextType | null>(null);
+
+
+// export type UserContextType = {
+//   user: User;
+//   userDispatch: React.Dispatch<any>; 
+// };
+
+// export const UserContext = createContext<UserContextType | null>(null);
 
 
 const HomePage = () => {
 
-  const initialUser: User = {
-    id : null,
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-    addres: '',
-    phone: ''
-  };
+  // const initialUser: User = {
+  //   id : null,
+  //   firstName: '',
+  //   lastName: '',
+  //   email: '',
+  //   password: '',
+  //   addres: '',
+  //   phone: ''
+  // };
 
-  const [user, userDispatch] = useReducer(userReducer, initialUser)
+  // const [user, userDispatch] = useReducer(userReducer, initialUser)
   const [loginSuccess, setLoginSuccess] = useState(false); 
 
   const handleLoginSuccess = () => {
@@ -43,6 +45,9 @@ const HomePage = () => {
 
 
   return (<>
+ <h1>My recipes site</h1>
+
+
 
     <Grid container>
       <Grid sx={{
@@ -50,7 +55,7 @@ const HomePage = () => {
         top: 5,
         left: 5
       }}>
-        <UserContext.Provider value={{ user, userDispatch }}>
+        {/* <UserContext value={{ user, userDispatch }}> */}
           {!loginSuccess ? ( 
           <>
             <Login onLoginSuccess={handleLoginSuccess} />
@@ -63,23 +68,23 @@ const HomePage = () => {
               <UpdateDetails />
             </>
           )}
-    <AddRecipe></AddRecipe>
+    {/* <AddRecipe></AddRecipe> */}
 
-        </UserContext.Provider>
+        {/* </UserContext> */}
       </Grid>
     </Grid>
 
 
-
+{/* 
     {user.id}
     {user.firstName}
     {user.lastName}
     {user.email}
     {user.password}
     {user.addres}
-    {user.phone}
+    {user.phone} */}
 
-    <RecipesList></RecipesList>
+    {/* <RecipesList></RecipesList> */}
     {/* <AddRecipe></AddRecipe> */}
 
   </>)

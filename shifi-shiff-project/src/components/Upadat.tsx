@@ -1,8 +1,7 @@
 import { Box, Button, Modal, TextField, Typography } from "@mui/material";
 import { useContext, useRef, useState } from "react";
-import { UserContext } from "./HomePage";
-import axios from "axios";
-import { userReducer } from "./User";
+import { UserContext } from "./AppLayout";
+import axios, { AxiosError } from "axios";
 
 
 const style = {
@@ -60,7 +59,7 @@ const UpdateDetails = () => {
           }
     
         } catch (e) {
-          if (e.status === 401)
+          if ((e as AxiosError).response && (e as AxiosError).response?.status === 401)
             alert('משתמש לא קיים')
           console.log(e);
     

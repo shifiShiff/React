@@ -1,7 +1,7 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
-import { UserContext } from "./HomePage";
+import { UserContext } from "./AppLayout";
 import { Box, Modal, TextField, Typography } from "@mui/material";
 import axios, { AxiosError } from "axios";
 
@@ -30,7 +30,7 @@ const Login = ({ onLoginSuccess }: { onLoginSuccess: Function }) => {
   const passwordref = useRef<HTMLInputElement>(null)
   const [clicked, setClicked] = useState(false)
   const context = useContext(UserContext);
-  const [user, setUser] = useState({})
+  const [, setUser] = useState({})
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -61,7 +61,7 @@ const Login = ({ onLoginSuccess }: { onLoginSuccess: Function }) => {
 
 
     } catch (e) {
-      if (e.status === 401)
+      if ((e as AxiosError).response && (e as AxiosError).response?.status === 401)
         alert('מייל או סיסמא לא תקינים')
       console.log(e);
 

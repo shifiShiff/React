@@ -1,12 +1,12 @@
-import { Box, Button, Modal, TextField, Typography } from "@mui/material"
+import { Alert, Box, Button, Modal, TextField, Typography } from "@mui/material"
 import { array, object, string } from "yup"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form"
 import recipesStore, { RecipeType } from "../srore/recipesStore"
-import { useContext, useEffect, useState } from "react"
+import { useContext, useState } from "react"
 import SendIcon from '@mui/icons-material/Send';
 import AddIcon from '@mui/icons-material/Add';
-import { UserContext } from "./HomePage"
+import { UserContext } from "./AppLayout"
 import { observer } from "mobx-react-lite"
 
 
@@ -25,13 +25,14 @@ const style = {
 
 
 const schema = object({
-    title: string().required('error'),
+    title: string().required('Error: title is required'),
     description: string().required().min(10, 'description nust be 10 letters'),
     // ingredients: string().required('error'),
     ingredients: array()
-        .of(string().required('Each product is required')) // כל פריט במערך חייב להיות מחרוזת
-        .min(1, 'At least one product is required'), // חייב להיות לפחות מוצר אחד
-    instructions: string().required('error'),
+        .min(1, 'At least one product is required'),
+    //    .of(string().required('Each product is required')), // כל פריט במערך חייב להיות מחרוזת
+    // חייב להיות לפחות מוצר אחד
+    instructions: string().required('Error: instructions is required'),
 
 })
 
@@ -41,7 +42,6 @@ const AddRecipe = observer(() => {
 
     const [clicked, setClicked] = useState(false)
     const context = useContext(UserContext);
-    // const [products, setProducts] = useState<string[]>(['']); // מערך של מוצרים
 
 
     const onSubmit: SubmitHandler<RecipeType> = (data) => {
@@ -55,17 +55,6 @@ const AddRecipe = observer(() => {
         });
     }
 
-    // const addProductField = () => {
-    //     setProducts([...products, '']); // הוספת שדה חדש למערך
-
-    // };
-
-    // const handleProductChange = (value: string, index: number) => {
-    //     const updatedProducts = [...products];
-    //     updatedProducts[index] = value;
-    //     setProducts(updatedProducts);
-    // };
-  
 
     const { control } = useForm({ resolver: yupResolver(schema) });
 
@@ -81,32 +70,24 @@ const AddRecipe = observer(() => {
         name: "ingredients", // שם המערך כפי שהוא בסכמה
     });
 
- 
-        // useEffect(() => {
-        //     if (clicked) {
-        //         reset({
-        //             ingredients: [] // מנקה את המערך
-        //         });
-        //         append({}); // מוסיף שדה ריק אחד
-        //     }
-        // }, [clicked, reset, append]);
-    
-        const handleModalOpen = () => {
-            // setClicked(true);
-            console.log("yyyyyyyyyyyy");
 
-            reset({
-                ingredients: [] // נוודא שהמערך מתחיל עם שדה ריק אחד בלבד
-            });
-            fields.forEach((field, index) => {
-                remove(index); // מסיר את כל השדות הנוכחיים
-            });
-        };
+
+    const handleModalOpen = () => {
+        console.log("yyyyyyyyyyyy");
+
+        reset({
+            ingredients: [] // נוודא שהמערך מתחיל עם שדה ריק אחד בלבד
+        });
+        fields.forEach((_field, index) => {
+            remove(index); // מסיר את כל השדות הנוכחיים
+        });
+    };
     return (<>
 
-        <Button onClick={() => { handleModalOpen()
+        <Button onClick={() => {
+            handleModalOpen()
             setClicked(true)
-         }} variant="outlined" sx={{ backgroundColor: 'white', color: ' #40E0D0 ', border: '1px solid gray' }}>Add Recipe</Button>
+        }} variant="outlined" sx={{ backgroundColor: 'white', color: ' #40E0D0 ', border: '1px solid gray' }}>Add Recipe</Button>
 
         <Modal
             open={clicked}
@@ -118,49 +99,32 @@ const AddRecipe = observer(() => {
                 <Typography id="modal-modal-title" variant="h6" component="h2">
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <div><TextField {...register('title')} type="text" fullWidth label="title" variant="outlined" />
-                            {errors.title && <span>{errors.title.message}</span>}</div>
+                            {errors.title && <Alert severity="error">{errors.title?.message}</Alert>}
+                        </div>
+
                         <div><TextField {...register('description')} type="text" fullWidth label="description" variant="outlined" />
-                            {errors.description && <span>{errors.description.message}</span>}</div>
-                        {/* <div><TextField {...register('ingredients')} type="text" fullWidth label="ingredients" variant="outlined" />
-                            {errors.ingredients && <span>{errors.ingredients.message}</span>}</div> */}
+                            {errors.description && <Alert severity="error">{errors.description?.message}</Alert>}</div>
 
-                        <Typography variant="subtitle1" sx={{ mt: 2 }}>Products:</Typography>
-                        {/* {products.map((product, index) => (
-                            <div key={index} style={{ display: 'flex', alignItems: 'center', marginBottom: '8px' }}>
-                                <TextField
-                                    {...register(`ingredients.${index}`)}
-                                    type="text"
-                                    fullWidth
-                                    variant="outlined"
-                                    value={product}
-                                    onChange={(e) => handleProductChange(e.target.value, index)}
-                                    label={`Product ${index + 1}`}
-                                />
-                            </div>
-                        ))} */}
-                        {/* 
-                        <Button
-                            type="button"
-                            onClick={addProductField}
-                            variant="outlined"
-                            startIcon={<AddIcon />}
-                            sx={{ mt: 1 }}
-                        >
-                            Add Product
-                        </Button> */}
+                        <div>
+                            <Typography variant="subtitle1" sx={{ mt: 2 }}>Products:</Typography>
 
-                        {fields.map((field, index) => (
-                            <div key={field.id}>
-                                <TextField
-                                    {...register(`ingredients.${index}`)}
-                                    type="text"
-                                    fullWidth
-                                    variant="outlined"
-                                    label={`Product ${index + 1}`}
-                                />
-                                <Button onClick={() => remove(index)}>Remove</Button>
-                            </div>
-                        ))}
+
+                            {fields.map((field, index) => (
+                                <div key={field.id}>
+                                    <TextField
+                                        {...register(`ingredients.${index}`)}
+                                        type="text"
+                                        fullWidth
+                                        variant="outlined"
+                                        label={`Product ${index + 1}`}
+                                    />
+                                    <Button onClick={() =>{ remove(index); 
+                                         reset({ ingredients: fields.filter((_, i) => i !== index) });
+                                    }}>remove</Button>
+                                </div>
+                            ))}
+                            {errors.ingredients && <Alert severity="error">{errors.ingredients?.message}</Alert>}</div>
+
                         <Button
                             onClick={() => append({})}
                             variant="outlined"
@@ -170,7 +134,7 @@ const AddRecipe = observer(() => {
                         </Button>
 
                         <div><TextField {...register('instructions')} type="text" fullWidth label="instructions" variant="outlined" />
-                            {errors.instructions && <span>{errors.instructions.message}</span>}</div>
+                            {errors.instructions && <Alert severity="error">{errors.instructions?.message}</Alert>}</div>
 
 
                         <Button type='submit' variant="contained" endIcon={<SendIcon />} sx={{
@@ -186,7 +150,7 @@ const AddRecipe = observer(() => {
                 </Typography>
 
             </Box>
-        </Modal>
+        </Modal >
 
 
     </>)
