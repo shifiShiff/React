@@ -5,7 +5,8 @@ import UpdateDetails from "./Upadat";
 import UserName from "./userName+Avatar";
 import { Grid2 as Grid } from "@mui/material";
 import SignIn from "./Sign";
-import Recipes from "./recipes";
+import RecipesList from "./recipesList";
+import AddRecipe from "./addRecipe";
 
 //  export const UserContext = createContext({})
 
@@ -49,14 +50,11 @@ const HomePage = () => {
         top: 5,
         left: 5
       }}>
-
         <UserContext.Provider value={{ user, userDispatch }}>
-
           {!loginSuccess ? ( 
           <>
             <Login onLoginSuccess={handleLoginSuccess} />
             <SignIn onLoginSuccess={handleLoginSuccess}/>
-
             </>
             
           ) : ( 
@@ -65,12 +63,10 @@ const HomePage = () => {
               <UpdateDetails />
             </>
           )}
-
+    <AddRecipe></AddRecipe>
 
         </UserContext.Provider>
-
       </Grid>
-
     </Grid>
 
 
@@ -83,7 +79,8 @@ const HomePage = () => {
     {user.addres}
     {user.phone}
 
-    <Recipes></Recipes>
+    <RecipesList></RecipesList>
+    {/* <AddRecipe></AddRecipe> */}
 
   </>)
 
