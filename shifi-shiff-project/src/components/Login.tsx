@@ -4,6 +4,7 @@ import SendIcon from '@mui/icons-material/Send';
 import { UserContext } from "./AppLayout";
 import { Box, Modal, TextField, Typography } from "@mui/material";
 import axios, { AxiosError } from "axios";
+import { Height } from "@mui/icons-material";
 
 
 
@@ -74,7 +75,7 @@ const Login = ({ onLoginSuccess }: { onLoginSuccess: Function }) => {
 
   return (<>
 
-    <Button onClick={() => { setClicked(true) }} variant="outlined" sx={{ backgroundColor: 'white', color: ' #40E0D0 ', border: '1px solid gray' }}>Login</Button>
+    <Button onClick={() => { setClicked(true) }} variant="outlined" sx={{ backgroundColor: 'white', color: ' #40E0D0 ', border: '1px solid gray'  }}>Login</Button>
 
 
     {clicked &&

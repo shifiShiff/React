@@ -1,8 +1,8 @@
-import { Divider, Grid2 as Grid, ListItemIcon, ListItemText, MenuItem, MenuList, Paper, Typography } from "@mui/material";
+import { ListItemIcon, ListItemText, MenuItem, MenuList, Paper, Typography } from "@mui/material";
 import { UserContext } from "./AppLayout";
 import HomeIcon from '@mui/icons-material/Home';
-import AddIcon   from '@mui/icons-material/Add';
-import FastfoodIcon  from '@mui/icons-material/Fastfood';
+import AddIcon from '@mui/icons-material/Add';
+import FastfoodIcon from '@mui/icons-material/Fastfood';
 
 import { Link } from "react-router"
 import { useContext } from "react";
@@ -10,10 +10,10 @@ import { useContext } from "react";
 
 const NavBar = () => {
 
-    const context = useContext(UserContext);
+  const context = useContext(UserContext);
 
-    return (<>
-        {/* <Grid container>
+  return (<>
+    {/* <Grid container>
             <Grid sx={{
                 position: "fixed",
                 top: 5,
@@ -45,52 +45,96 @@ const NavBar = () => {
 
 
 
+    {/* <div style={{ position: "absolute", top: "5px", right: "5px" }}>
+
+
+      <Paper sx={{ width: 150, maxWidth: '100%' }}>
+        <MenuList>
+
+          <Link to='/'><MenuItem>
+            <ListItemIcon>
+              <HomeIcon fontSize="small" />
+            </ListItemIcon>
+            <ListItemText>Home</ListItemText>
+            <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+            </Typography>
+          </MenuItem></Link>
+
+          <Link to={`/recipes`}><MenuItem>
+            <ListItemIcon>
+              <FastfoodIcon fontSize="small" />
+
+            </ListItemIcon>
+            <ListItemText>Show recipes</ListItemText>
+            <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+            </Typography>
+          </MenuItem></Link>
 
 
 
-        <Paper sx={{ width: 320, maxWidth: '100%' }}>
-      <MenuList>
+
+
+          {context?.user.id != null &&
+            <Link to={`/Addrecipe`}><MenuItem>
+              <ListItemIcon>
+                <AddIcon fontSize="small" />
+              </ListItemIcon>
+              <ListItemText>Add recipe</ListItemText>
+              <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+              </Typography>
+            </MenuItem></Link>}
+
+
+        </MenuList>
+      </Paper>
+    </div> */}
+
+
+
+<div style={{ position: "absolute", top: "10px", right: "10px" }}>
+  <Paper sx={{ width: 180, maxWidth: '100%', padding: 1, borderRadius: 2 }}>
+    <MenuList>
+
+      <Link to='/' style={{ textDecoration: 'none', color: 'inherit' }}>
         <MenuItem>
-        <Link to='/'>
           <ListItemIcon>
-            {/* <ContentCut fontSize="small" /> */}
-            <HomeIcon fontSize="small" />
+            <HomeIcon fontSize="small" sx={{ color: '#40E0D0' }} />
           </ListItemIcon>
-          <ListItemText>Home</ListItemText>
-          <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-          </Typography></Link>
+          <ListItemText primaryTypographyProps={{ fontWeight: 'bold', color: '#333' }}>
+            Home
+          </ListItemText>
         </MenuItem>
-        
+      </Link>
+
+      <Link to='/recipes' style={{ textDecoration: 'none', color: 'inherit' }}>
         <MenuItem>
-        <Link to={`/recipes`}>
           <ListItemIcon>
-            {/* <ContentCopy fontSize="small" /> */}
-            <FastfoodIcon  fontSize="small" />
-
+            <FastfoodIcon fontSize="small" sx={{ color: '#40E0D0' }} />
           </ListItemIcon>
-          <ListItemText>Show recipes</ListItemText>
-          <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-          </Typography>
-          </Link> 
+          <ListItemText primaryTypographyProps={{ fontWeight: 'bold', color: '#333' }}>
+            Show recipes
+          </ListItemText>
         </MenuItem>
+      </Link>
 
+      {context?.user.id != null && (
+        <Link to='/Addrecipe' style={{ textDecoration: 'none', color: 'inherit' }}>
+          <MenuItem>
+            <ListItemIcon>
+              <AddIcon fontSize="small" sx={{ color: '#40E0D0' }} />
+            </ListItemIcon>
+            <ListItemText primaryTypographyProps={{ fontWeight: 'bold', color: '#333' }}>
+              Add recipe
+            </ListItemText>
+          </MenuItem>
+        </Link>
+      )}
 
-        
-        <MenuItem>
-        { context?.user.id!=null &&
-                <Link to={`/addRecipe`}>
-          <ListItemIcon>
-            <AddIcon  fontSize="small" />
-          </ListItemIcon>
-          <ListItemText>Add recipe</ListItemText>
-          <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-          </Typography>
-          </Link> }
-        </MenuItem>
+    </MenuList>
+  </Paper>
+</div>
 
-      </MenuList>
-    </Paper>
-    </>)
+  </>)
 }
 
 export default NavBar
