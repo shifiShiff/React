@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite";
-import { RecipeType } from "../srore/recipesStore";
-import RecipeStore from "../srore/recipesStore"
+import { RecipeType } from "../store/recipesStore";
+import RecipeStore from "../store/recipesStore"
 import { Box, IconButton,  Typography } from "@mui/material";
 import { Grid2 as Grid } from "@mui/material";
 import CheckIcon from '@mui/icons-material/Check';
@@ -20,8 +20,7 @@ const RecipesList = observer(() => {
   return (<>
 
 <Grid container spacing={2} sx={{ padding: 2 }}>
-  {/* צד שמאל - רשימת המתכונים */}
-  <Grid xs={12} sm={4}>
+  <Grid size={{ xs: 12, md: 5 }}>
     <Box sx={{
       padding: 2,
       border: '1px solid #ccc',
@@ -29,8 +28,8 @@ const RecipesList = observer(() => {
       height: '100%',
       display: 'flex',
       flexDirection: 'column',
-      overflowY: 'auto', // מאפשר גלילה במקרה של יותר מדי מתכונים
-      maxHeight: 'calc(100vh - 40px)', // מוודא שהרשימה לא תצא מחוץ לגבולות המסך
+      overflowY: 'auto', 
+      maxHeight: 'calc(100vh - 40px)',
       paddingRight: { xs: 0, sm: 2 },
       paddingBottom: { xs: 2, sm: 0 },
       boxShadow: '0px 4px 10px rgba(64, 224, 208, 0.5)', 
@@ -46,12 +45,11 @@ const RecipesList = observer(() => {
             padding: 1,
             border: '1px solid #eee',
             borderRadius: 2,
-            // boxShadow: 1, // מוסיף צל להפרדה
-            boxShadow: '0px 4px 5px rgba(64, 224, 208, 0.5)', // צל בצבע טורקיז שקוף
+            boxShadow: '0px 4px 5px rgba(64, 224, 208, 0.5)', 
 
             '&:hover': {
-              backgroundColor: '#f5f5f5', // שינוי צבע בעת ריחוף
-              boxShadow: '0px 4px 10px rgba(64, 224, 208, 0.8)', // צל יותר חזק בריחוף
+              backgroundColor: '#f5f5f5', 
+              boxShadow: '0px 4px 10px rgba(64, 224, 208, 0.8)', 
 
             },
           }}
@@ -66,39 +64,24 @@ const RecipesList = observer(() => {
     </Box>
   </Grid>
 
-  {/* צד ימין - המתכון הנבחר */}
-  <Grid xs={12} sm={8}>
+
+  <Grid size={{ xs: 12, md: 7 }}>
     <Box sx={{
       padding: 2,
       border: '1px solid #ccc',
       height: '100%',
-      borderRadius: 2, // רדיוס פינות
-      // boxShadow: 3, // צל קטן להבלטה
-      boxShadow: '0px 4px 10px rgba(64, 224, 208, 0.5)', // צל בצבע טורקיז שקוף
+      boxShadow: '0px 4px 10px rgba(64, 224, 208, 0.5)', 
 
     }} component="section">
       <Outlet />
     </Box>
   </Grid>
 </Grid>
-
-
-
-
-
-
-
-
      
 
   </>)
 
 })
-
-
-
-
-
 
 
 export default RecipesList

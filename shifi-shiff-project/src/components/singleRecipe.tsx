@@ -1,5 +1,5 @@
 import { useParams } from "react-router";
-import recipesStore from "../srore/recipesStore";
+import recipesStore from "../store/recipesStore";
 import { observer } from "mobx-react-lite";
 import { Card, CardContent, Divider, List, ListItem, Typography } from "@mui/material";
 

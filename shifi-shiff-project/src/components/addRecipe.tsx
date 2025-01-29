@@ -2,7 +2,7 @@ import { Alert, Box, Button, Modal, TextField, Typography } from "@mui/material"
 import { array, object, string } from "yup"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form"
-import recipesStore, { RecipeType } from "../srore/recipesStore"
+import recipesStore, { RecipeType } from "../store/recipesStore"
 import { useContext, useState } from "react"
 import SendIcon from '@mui/icons-material/Send';
 import AddIcon from '@mui/icons-material/Add';

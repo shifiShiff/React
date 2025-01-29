@@ -5,9 +5,6 @@ import { UserContext } from "./AppLayout";
 import { Box, Modal, TextField, Typography } from "@mui/material";
 import axios, { AxiosError } from "axios";
 
-
-
-
 const style = {
   position: 'absolute',
   top: '50%',
@@ -21,10 +18,7 @@ const style = {
   p: 4,
 };
 
-
-
 const SignIn = ({ onLoginSuccess }: { onLoginSuccess: Function }) => {
-
 
   const nameref = useRef<HTMLInputElement>(null)
   const passwordref = useRef<HTMLInputElement>(null)
@@ -41,8 +35,7 @@ const SignIn = ({ onLoginSuccess }: { onLoginSuccess: Function }) => {
       const res = await axios.post('http://localhost:3000/api/user/register', {
         firstName: nameref.current?.value,
         password: passwordref.current?.value
-      }
-       
+      }    
       )
 
       console.log(res);
@@ -64,15 +57,9 @@ const SignIn = ({ onLoginSuccess }: { onLoginSuccess: Function }) => {
   }
 
 
-
-
-
   return (<>
 
-
     <Button onClick={() => { setClicked(true) }} variant="outlined" sx={{ backgroundColor: 'white', color: ' #40E0D0 ', border: '1px solid gray', marginLeft:'10px', marginTop:'10px' }}>Sign Up</Button>
-
-
     {clicked &&
       <Modal
         open={clicked}
