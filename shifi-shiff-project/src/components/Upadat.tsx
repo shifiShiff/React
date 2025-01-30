@@ -1,7 +1,7 @@
 import { Box, Button, Modal, TextField, Typography } from "@mui/material";
 import { useContext, useRef, useState } from "react";
 import { UserContext } from "./AppLayout";
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 
 const style = {
     position: 'absolute',
@@ -46,8 +46,8 @@ const UpdateDetails = () => {
             setClicked(false)
               context.userDispatch({ type: 'UPDATE', data: res.data.user })
           }
-        } catch (e) {
-          if ((e as AxiosError).response && (e as AxiosError).response?.status === 404)
+        } catch (e:any) {
+          if (e.status === 404)
             alert('User not found')
           console.log(e);
     

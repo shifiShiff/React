@@ -1,7 +1,7 @@
 import {useState } from "react";
 import Login from "./Login";
 import UpdateDetails from "./Upadat";
-import UserName from "./userName+Avatar";
+import UserName from "./UserNameAvatar";
 import {Grid2 as Grid } from "@mui/material";
 import SignIn from "./Sign";
 

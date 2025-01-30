@@ -20,8 +20,6 @@ export const userReducer=(state:User, action:Action) :User =>{
     switch(action.type){
         case 'CREATE':{
             const {id,firstName,lastName,password,email,addres,phone}= action.data as Partial<User>
-            // console.log(id);
-            // console.log('Reducer - New User:', action.data);
             
             return {
                 id:id??null,
@@ -35,11 +33,9 @@ export const userReducer=(state:User, action:Action) :User =>{
             }}
 
         case 'UPDATE':
-            // console.log(action.data);
             
             return {
                 ...state,
-                // id:action.data.id||state.id,//??????????
                 id: action.data.id !== undefined ? action.data.id : state.id,
                 firstName:state.firstName,
                 lastName: action.data.lastName || state.lastName,
@@ -47,9 +43,7 @@ export const userReducer=(state:User, action:Action) :User =>{
                 email: action.data.email || state.email,
                 addres: action.data.addres || state.addres,
                 phone: action.data.phone || state.phone,
-                // ...state,
-                // ...action.data
-
+               
             }
         default:
             return state

@@ -7,7 +7,6 @@ import { Card, CardContent, Divider, List, ListItem, Typography } from "@mui/mat
 
 const SingleRecipe = observer(() => {
     const { id } = useParams();
-
     const recipe = recipesStore.GetRecipeById(Number(id));
 
     return (<>
@@ -36,6 +35,10 @@ const SingleRecipe = observer(() => {
                 </ListItem>
               ))}
             </List>
+
+            <Typography variant="h6">Instructions: </Typography>
+            <Typography variant="body1">{recipe.instructions}: </Typography>
+
           </CardContent>
         </Card>
       )}

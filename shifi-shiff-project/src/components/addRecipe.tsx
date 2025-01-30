@@ -1,3 +1,4 @@
+
 import { Alert, Box, Button, Modal, TextField, Typography } from "@mui/material"
 import { array, object, string } from "yup"
 import { yupResolver } from "@hookform/resolvers/yup"
@@ -80,12 +81,11 @@ const AddRecipe = observer(() => {
                         <div><Typography variant="subtitle1" sx={{ mt: 2 }}>Products:</Typography>
                             {fields.map((field, index) => (
                                 <div key={field.id}>
-                                    <TextField {...register(`ingredients.${index}`)} type="text" fullWidth variant="outlined" label={`Product ${index + 1}`}/>
-                                    <Button onClick={() =>{ remove(index); reset({ ingredients: fields.filter((_, i) => i !== index) });}}>remove</Button></div>))}
+                                    <TextField {...register(`ingredients.${index}`)} type="text" fullWidth variant="outlined" label={`Product ${index + 1}`}/></div>))}
                             {errors.ingredients && <Alert severity="error">{errors.ingredients?.message}</Alert>}</div>
                         <Button onClick={() => append({})} variant="outlined" startIcon={<AddIcon />}>Add Product</Button>
 
-                        <div><TextField {...register('instructions')} type="text" fullWidth label="instructions" variant="outlined" />
+                        <div><TextField {...register('instructions')} type="text" multiline fullWidth label="instructions" variant="outlined" />
                             {errors.instructions && <Alert severity="error">{errors.instructions?.message}</Alert>}</div>
 
                         <Button type='submit' variant="contained" endIcon={<SendIcon />} sx={{backgroundColor: 'white',color: ' #40E0D0 ', marginTop: '15px', 

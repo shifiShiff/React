@@ -3,7 +3,6 @@ import { UserContext } from "./AppLayout";
 import HomeIcon from '@mui/icons-material/Home';
 import AddIcon from '@mui/icons-material/Add';
 import FastfoodIcon from '@mui/icons-material/Fastfood';
-
 import { Link } from "react-router"
 import { useContext } from "react";
 
@@ -24,7 +23,7 @@ const NavBar = () => {
           <ListItemIcon>
             <HomeIcon fontSize="small" sx={{ color: '#40E0D0' }} />
           </ListItemIcon>
-          <ListItemText primaryTypographyProps={{ fontWeight: 'bold', color: '#333' }}>
+          <ListItemText sx={{ fontWeight: 'bold', color: '#333' }}>
             Home
           </ListItemText>
         </MenuItem>
@@ -35,7 +34,7 @@ const NavBar = () => {
           <ListItemIcon>
             <FastfoodIcon fontSize="small" sx={{ color: '#40E0D0' }} />
           </ListItemIcon>
-          <ListItemText primaryTypographyProps={{ fontWeight: 'bold', color: '#333' }}>
+          <ListItemText sx={{ fontWeight: 'bold', color: '#333' }}>
             Show recipes
           </ListItemText>
         </MenuItem>
@@ -47,7 +46,7 @@ const NavBar = () => {
             <ListItemIcon>
               <AddIcon fontSize="small" sx={{ color: '#40E0D0' }} />
             </ListItemIcon>
-            <ListItemText primaryTypographyProps={{ fontWeight: 'bold', color: '#333' }}>
+            <ListItemText sx={{ fontWeight: 'bold', color: '#333' }}>
               Add recipe
             </ListItemText>
           </MenuItem>

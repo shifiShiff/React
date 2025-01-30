@@ -1,6 +1,5 @@
 import axios from "axios";
 import { makeAutoObservable } from "mobx";
-import { AxiosError } from 'axios';
 
 
 export type RecipeType = {
@@ -30,8 +29,8 @@ class RecipeStore {
 
             this.list = res.data;
 
-        } catch (e) {
-            if ((e as AxiosError).response && (e as AxiosError).response?.status === 401) 
+        } catch (e:any) {
+            if (e.status === 401) 
                 alert("something worng...")
             console.log(e);
         }
@@ -56,11 +55,11 @@ class RecipeStore {
                 }
             )
 
-            console.log(res);
-            this.getAllRecipesFromServer();
+            console.log(res.data.recipe);
+            this.list.push(res.data.recipe)
 
-        } catch (e) {
-            if ((e as AxiosError).response && (e as AxiosError).response?.status === 403)
+        } catch (e:any) {
+            if (e .status === 403)
                 alert('You must be logged in to add a recipe')
             console.log(e);
 

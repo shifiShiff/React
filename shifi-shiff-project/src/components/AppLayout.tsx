@@ -1,8 +1,8 @@
 import { Outlet } from "react-router"
 import NavBar from "./NavBar"
 import { createContext, useReducer } from "react";
-import { User, userReducer } from "./User";
 import HomePage from "./HomePage";
+import { User, userReducer } from "./User";
 
 export type UserContextType = {
     user: User;

@@ -3,7 +3,7 @@ import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
 import { UserContext } from "./AppLayout";
 import { Box, Modal, TextField, Typography } from "@mui/material";
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 
 const style = {
   position: 'absolute',
@@ -43,8 +43,8 @@ const Login = ({ onLoginSuccess }: { onLoginSuccess: Function }) => {
         console.log(context.user);
       }
 
-    } catch (e) {
-      if ((e as AxiosError).response && (e as AxiosError).response?.status === 401)
+    } catch (e:any) {
+      if (e.status === 401)
         alert('Invalid credentials')
       console.log(e);
     }

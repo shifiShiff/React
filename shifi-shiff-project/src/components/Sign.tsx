@@ -3,7 +3,7 @@ import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
 import { UserContext } from "./AppLayout";
 import { Box, Modal, TextField, Typography } from "@mui/material";
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 
 const style = {
   position: 'absolute',
@@ -48,8 +48,8 @@ const SignIn = ({ onLoginSuccess }: { onLoginSuccess: Function }) => {
           context.userDispatch({ type: 'CREATE', data: {id:res.data.userId, firstName: nameref.current?.value || '', password: passwordref.current?.value || '' } })
       }
 
-    } catch (e) {
-      if ((e as AxiosError).response && (e as AxiosError).response?.status === 400)
+    } catch (e:any) {
+      if (e.status === 400)
         alert("User already exists")
       console.log(e);
 

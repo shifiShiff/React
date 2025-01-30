@@ -1,8 +1,8 @@
 import AppLayout from "./components/AppLayout";
-import RecipesList from "./components/recipesList";
+import RecipesList from "./components/RecipesList";
 import {createBrowserRouter } from "react-router";
-import AddRecipe from "./components/addRecipe";
-import SingleRecipe from "./components/singleRecipe";
+import AddRecipe from "./components/AddRecipe";
+import SingleRecipe from "./components/SingleRecipe";
 
 
 export const myRouter = createBrowserRouter([

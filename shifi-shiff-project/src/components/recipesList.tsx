@@ -20,7 +20,7 @@ const RecipesList = observer(() => {
   return (<>
 
 <Grid container spacing={2} sx={{ padding: 2 }}>
-  <Grid size={{ xs: 12, md: 5 }}>
+  <Grid size={{ xs: 12 ,md:6}}>
     <Box sx={{
       padding: 2,
       border: '1px solid #ccc',
@@ -30,7 +30,7 @@ const RecipesList = observer(() => {
       flexDirection: 'column',
       overflowY: 'auto', 
       maxHeight: 'calc(100vh - 40px)',
-      paddingRight: { xs: 0, sm: 2 },
+      paddingRight: { xs: 0, sm: 2},
       paddingBottom: { xs: 2, sm: 0 },
       boxShadow: '0px 4px 10px rgba(64, 224, 208, 0.5)', 
     }}>
@@ -65,11 +65,11 @@ const RecipesList = observer(() => {
   </Grid>
 
 
-  <Grid size={{ xs: 12, md: 7 }}>
+  <Grid size={{ xs: 12, md:6}}>
     <Box sx={{
       padding: 2,
       border: '1px solid #ccc',
-      height: '100%',
+      height: '95%',
       boxShadow: '0px 4px 10px rgba(64, 224, 208, 0.5)', 
 
     }} component="section">
