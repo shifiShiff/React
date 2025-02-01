@@ -1,6 +1,7 @@
 import { ListItemIcon, ListItemText, MenuItem, MenuList, Paper} from "@mui/material";
 import { UserContext } from "./AppLayout";
 import HomeIcon from '@mui/icons-material/Home';
+import EditIcon from '@mui/icons-material/Edit';
 import AddIcon from '@mui/icons-material/Add';
 import FastfoodIcon from '@mui/icons-material/Fastfood';
 import { Link } from "react-router"
@@ -51,7 +52,18 @@ const NavBar = () => {
             </ListItemText>
           </MenuItem>
         </Link>
-      )}
+      )} 
+       {context?.user.id != null &&
+        (<Link to='/RecipiesById' style={{ textDecoration: 'none', color: 'inherit' }}>
+          <MenuItem>
+            <ListItemIcon>
+              <EditIcon fontSize="small" sx={{ color: '#40E0D0' }} />
+            </ListItemIcon>
+            <ListItemText sx={{ fontWeight: 'bold', color: '#333' }}>
+              Update Recipes
+            </ListItemText>
+          </MenuItem>
+        </Link>)}
 
     </MenuList>
   </Paper>

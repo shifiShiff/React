@@ -1,50 +1,73 @@
-# React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+למורה היקרה!
 
-Currently, two official plugins are available:
+עשיתי כמה שינויים בשרת
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+בUSER
+```ts
+router.post('/login', (req, res) => {
+    const { firstName, password } = req.body;
+    const db = JSON.parse(fs.readFileSync(dbPath));
+    console.log(req);
 
-## Expanding the ESLint configuration
+    const user = db.users.find(user => user.firstName === firstName && user.password === password);
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+    if (!user) {
+        return res.status(401).json({ message: "Invalid credentials" });
+    }
 
-- Configure the top-level `parserOptions` property like this:
+    res.json({ message: "Login successful", user });
+});
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+
+
+
+router.put('/', authMiddleware, (req, res) => {
+    const { firstName, lastName, email, address, phone } = req.body;
+    const id = parseInt(req.header('user-id'));
+    const db = JSON.parse(fs.readFileSync(dbPath));
+    const user = db.users.find(user => user.id === id);
+
+    if (!user) {
+        return res.status(404).json({ message: "User not found" });
+    }
+
+    user.firstName = firstName;
+    user.lastName = lastName;
+    user.email = email;
+    user.address = address;
+    user.phone = phone;
+
+    fs.writeFileSync(dbPath, JSON.stringify(db, null, 2));
+
+    res.json({user});
+});
+
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+בRECIPE הוספת אפשרות עדכון מתכון
+ןמחקתי את PRODUCT שהיה רשום בPOST
+```ts
+router.put('/', (req, res) => {
+    const { title ,description, authorId,ingredients, instructions } = req.body;
+    const id = parseInt(req.header('recipe-id'));
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+    const db = JSON.parse(fs.readFileSync(dbPath));
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+    const recipe = db.recipes.find(recipe => recipe.id=== id);
+
+    if (!recipe) {
+        return res.status(404).json({ message: "Recipe not found" });
+    }
+
+ recipe.title=title;
+ recipe.authorId=authorId;
+ recipe.description=description;
+ recipe.ingredients=ingredients;
+ recipe.instructions= instructions;
+
+    fs.writeFileSync(dbPath, JSON.stringify(db, null, 2));
+
+    res.json({recipe});
+});
 ```

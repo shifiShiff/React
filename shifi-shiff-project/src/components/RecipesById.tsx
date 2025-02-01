@@ -1,23 +1,32 @@
 import { observer } from "mobx-react-lite";
-import  { RecipeType } from "../store/recipesStore";
-import RecipeStore from "../store/recipesStore"
+import recipesStore, { RecipeType } from "../store/recipesStore";
 import { Box, IconButton, Typography } from "@mui/material";
 import { Grid2 as Grid } from "@mui/material";
 import CheckIcon from '@mui/icons-material/Check';
 import { Outlet, useNavigate } from "react-router";
+import { useContext, useState } from "react";
+import { UserContext } from "./AppLayout";
 
-const RecipesList = observer(() => {
+const RecipesListByID = observer(() => {
 
-  const navigate = useNavigate();
+    const navigate = useNavigate();
+    const context = useContext(UserContext);
+    const Id = context?.user.id;
+    const listById = recipesStore.GetRecipesListById(Id);
+    const [clicked, setClicked] = useState(false)
 
-  const handleUpdate = (recipe: RecipeType) => {
-    navigate(`${recipe.id}`)
-    console.log("select one recipe");
-  }
 
-  return (<>
+    const handleUpdate = (recipe: RecipeType) => {
+        setClicked(true)
+        navigate(`${recipe.id}`)
+        console.log("select one recipe");
 
-    <Grid container spacing={2} sx={{ padding: 2 }}>
+    }
+
+
+    return (<>
+
+<Grid container spacing={2} sx={{ padding: 2 }}>
       <Grid size={{ xs: 12, md: 6 }}>
         <Box sx={{
           width:'250px',
@@ -30,8 +39,8 @@ const RecipesList = observer(() => {
           maxHeight: 'calc(100vh - 40px)',
           boxShadow: '0px 4px 10px rgba(64, 224, 208, 0.5)',
         }}>
-          <Typography variant="h6" sx={{ marginBottom: 2 }}>Our Recipes</Typography>
-          {RecipeStore.list.map((r) => (
+          <Typography variant="h6" sx={{ marginBottom: 2 }}>רשימת המתכונים</Typography>
+          {listById.map((r) => (
             <Box
               key={r.id}
               sx={{
@@ -61,21 +70,16 @@ const RecipesList = observer(() => {
       </Grid>
 
 
-      <Grid size={{ xs: 12, md: 6 }} >
-        <Box sx={{
-          padding: 2,
-          height: '95%',
+      <Grid size={{ xs: 12, md: 6 }} sx={{alignContent:'center', justifyContent:'center',padding: 2,}} >
+      
+          {clicked && <Outlet />}
 
-        }}>
-          <Outlet />
-        </Box>
       </Grid>
     </Grid>
 
-  </>)
+    </>)
 
 })
 
 
-export default RecipesList
-
+export default RecipesListByID

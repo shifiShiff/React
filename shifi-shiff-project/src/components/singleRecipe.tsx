@@ -11,7 +11,6 @@ const SingleRecipe = observer(() => {
 
     return (<>
 
-
 {recipe && (
         <Card sx={{ maxWidth: 600, margin: "auto", padding: 2, boxShadow: 3 }}>
           <CardContent>

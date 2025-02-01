@@ -4,11 +4,11 @@ import { makeAutoObservable } from "mobx";
 
 export type RecipeType = {
     id?: number,
-    title: string,
-    description: string,
+    title?: string,
+    description?: string,
     authorId?: number,
     ingredients?:string[],
-    instructions: string
+    instructions?: string
 }
 
 
@@ -24,6 +24,8 @@ class RecipeStore {
     }
     async getAllRecipesFromServer() {
 
+        console.log("get all recupies from server");
+        
         try {
             const res = await axios.get('http://localhost:3000/api/recipes')
 
@@ -70,7 +72,10 @@ class RecipeStore {
         return this.list.find(t=>t.id===id);
 
     }
+    GetRecipesListById(id:number|undefined|null){
+        return this.list.filter(t=>t.authorId == id);
 
+    }
 }
 
 export default new RecipeStore();
