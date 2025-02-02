@@ -84,28 +84,20 @@ const UpdateRecipe =observer( () => {
             <Box sx={style}>
                 <Typography id="modal-modal-title" variant="h6" component="h2">
                     <form onSubmit={handleSubmit(onSubmit)}>
-                        <div><TextField {...register('title')} type="text" fullWidth label="title" variant="outlined" />
-                            {errors.title && <Alert severity="error">{errors.title?.message}</Alert>}</div>
+                        <div><TextField {...register('title')} type="text" fullWidth label="title" variant="outlined" />{errors.title && <Alert severity="error">{errors.title?.message}</Alert>}</div>
 
-                        <div><TextField {...register('description')} type="text" fullWidth label="description" variant="outlined" />
-                            {errors.description && <Alert severity="error">{errors.description?.message}</Alert>}</div>
+                        <div><TextField {...register('description')} type="text" fullWidth label="description" variant="outlined" />{errors.description && <Alert severity="error">{errors.description?.message}</Alert>}</div>
 
                         <div><Typography variant="subtitle1" sx={{ mt: 2 }}>Products:</Typography>
                             {fields.map((field, index) => (
-                                <div key={field.id}>
-                                    <TextField {...register(`ingredients.${index}`)} type="text" fullWidth variant="outlined" label={`Product ${index + 1}`} /></div>))}
+                                <div key={field.id}><TextField {...register(`ingredients.${index}`)} type="text" fullWidth variant="outlined" label={`Product ${index + 1}`} /></div>))}
                             {errors.ingredients && <Alert severity="error">{errors.ingredients?.message}</Alert>}</div>
                         <Button onClick={() => append({})} variant="outlined" startIcon={<AddIcon />}>Add Product</Button>
 
-                        <div><TextField {...register('instructions')} type="text" multiline fullWidth label="instructions" variant="outlined" />
-                            {errors.instructions && <Alert severity="error">{errors.instructions?.message}</Alert>}</div>
+                        <div><TextField {...register('instructions')} type="text" multiline fullWidth label="instructions" variant="outlined" />{errors.instructions && <Alert severity="error">{errors.instructions?.message}</Alert>}</div>
 
                         <Button type='submit' variant="contained" endIcon={<SendIcon />} sx={{
-                            backgroundColor: 'white', color: ' #40E0D0 ', marginTop: '15px',
-                            '&:hover': {
-                                backgroundColor: '#f5f5f5',
-                            },
-                        }}
+                            backgroundColor: 'white', color: ' #40E0D0 ', marginTop: '15px','&:hover': {backgroundColor: '#f5f5f5',},}}
                         >Send</Button></form>
                 </Typography></Box></Modal >
     </>)
