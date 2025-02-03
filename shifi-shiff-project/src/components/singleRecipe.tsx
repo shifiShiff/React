@@ -12,7 +12,8 @@ const SingleRecipe = observer(() => {
     return (<>
 
 {recipe && (
-        <Card sx={{ maxWidth: 600, margin: "auto", padding: 2, boxShadow: 3 }}>
+        <Card sx={{ maxWidth: 600, margin: "auto", padding: 2, boxShadow: 3, height:'80%',overflowY: 'auto',
+        }}>
           <CardContent>
             <Typography variant="h5" sx={{ fontWeight: "bold", color: "#40E0D0" }}>
               {recipe.title}

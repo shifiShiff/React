@@ -24,8 +24,7 @@ const RecipesList = observer(() => {
           padding: 2,
           border: '1px solid #ccc',
           borderRadius: 2,
-          height: '100%',
-
+          height: '80%',
           overflowY: 'auto',
           maxHeight: 'calc(100vh - 40px)',
           boxShadow: '0px 4px 10px rgba(64, 224, 208, 0.5)',
@@ -64,7 +63,7 @@ const RecipesList = observer(() => {
       <Grid size={{ xs: 12, md: 6 }} >
         <Box sx={{
           padding: 2,
-          height: '95%',
+          height: '100%',
 
         }}>
           <Outlet />

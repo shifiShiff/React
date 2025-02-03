@@ -33,13 +33,12 @@ const RecipesListByID = observer(() => {
           padding: 2,
           border: '1px solid #ccc',
           borderRadius: 2,
-          height: '100%',
-
+          height: '80%',
           overflowY: 'auto',
           maxHeight: 'calc(100vh - 40px)',
           boxShadow: '0px 4px 10px rgba(64, 224, 208, 0.5)',
         }}>
-          <Typography variant="h6" sx={{ marginBottom: 2 }}>רשימת המתכונים</Typography>
+          <Typography variant="h6" sx={{ marginBottom: 2 }}>Your Recipes</Typography>
           {listById.map((r) => (
             <Box
               key={r.id}
